@@ -42,38 +42,45 @@ const Grid = () => {
   const runningRef = useRef(running);
   runningRef.current = running;
 
+// check cell neighbors function
+
+function checkAndAddNeighbors() {
+
+  const newGrid = [...grid];
+
+  for(let i = 0; i < numCols; i++){
+    for(let j = 0; j < numRows; j++) {
+      let neighbors = 0;
+      operations.forEach(([x,y]) => {
+        const newI = i + x;
+        const newJ = j + y;
+
+      // check neighbors and add up value to variable
+
+        if(newI >= 0 && newI < numCols && newJ >= 0 && newJ < numRows ){
+          neighbors += grid[newI][newJ];
+        }
+      })
+      // if there are less than 2 or more than 3 set to 0
+      if(neighbors < 2 || neighbors > 3) {
+        newGrid[i][j] = 0;
+        // if there are exactly 3 and the current value is 0 set
+        // to 1
+      } else if (grid[i][j] === 0 && neighbors === 3) {
+        newGrid[i][j] = 1; 
+      }
+    }
+  }
+
+  setGrid(newGrid);
+}
+
   const runSimulation = useCallback(() => {
     if(!runningRef.current) {
       return;
     }
 
-    const newGrid = [...grid];
-    
-    for(let i = 0; i < numCols; i++){
-      for(let j = 0; j < numRows; j++) {
-        let neighbors = 0;
-        operations.forEach(([x,y]) => {
-          const newI = i + x;
-          const newJ = j + y;
-
-        // check neighbors and add up value to variable
-
-          if(newI >= 0 && newI < numCols && newJ >= 0 && newJ < numRows ){
-            neighbors += grid[newI][newJ];
-          }
-        })
-        // if there are less than 2 or more than 3 set to 0
-        if(neighbors < 2 || neighbors > 3) {
-          newGrid[i][j] = 0;
-          // if there are exactly 3 and the current value is 0 set
-          // to 1
-        } else if (grid[i][j] === 0 && neighbors === 3) {
-          newGrid[i][j] = 1; 
-        }
-      }
-    }
-
-    setGrid(newGrid);
+    checkAndAddNeighbors();
 
     setTimeout(runSimulation, 1000);
   }, [])
