@@ -51,6 +51,7 @@ const Grid = () => {
         operations.forEach(([x,y]) => {
           const newI = i + x;
           const newJ = j + y;
+        
           if(newI >= 0 && newI < numCols && newJ >= 0 && newJ < numRows ){
             neighbors += grid[newI][newJ];
           }
@@ -63,32 +64,11 @@ const Grid = () => {
         }
       }
     }
+
     setGrid(newGrid);
 
     setTimeout(runSimulation, 1000);
   }, [])
-  // function game() {
-  //   while(running == true) {
-  //     for(let i = 0; i < numCols; i++){
-  //       for(let j = 0; j < numRows; j++) {
-  //         let cell = grid[i][j];
-  //         const cellNeighbors = [
-  //           grid[i + 1][j], 
-  //           grid[i][j + 1], 
-  //           grid[i + 1][j + 1], 
-  //           grid[i -1][j], 
-  //           grid[i][j - 1], 
-  //           grid[i -1][j - 1], 
-  //           grid[i - 1][j], 
-  //           grid[i + 1][j - 1], 
-  //         ]
-  //         cellNeighbors.map((c) => c = 1)
-  //       }
-  //     }
-  //   }
-  // }
-
-
 
   return (
     <>
