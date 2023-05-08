@@ -51,14 +51,18 @@ const Grid = () => {
         operations.forEach(([x,y]) => {
           const newI = i + x;
           const newJ = j + y;
-        
+
+        // check neighbors and add up value to variable
+
           if(newI >= 0 && newI < numCols && newJ >= 0 && newJ < numRows ){
             neighbors += grid[newI][newJ];
           }
         })
-
+        // if there are less than 2 or more than 3 set to 0
         if(neighbors < 2 || neighbors > 3) {
           newGrid[i][j] = 0;
+          // if there are exactly 3 and the current value is 0 set
+          // to 1
         } else if (grid[i][j] === 0 && neighbors === 3) {
           newGrid[i][j] = 1; 
         }
@@ -80,14 +84,20 @@ const Grid = () => {
         >
           {running ? 'Stop' : 'Start'}
           </button>
-        <div className="grid grid-cols-12 gap-0 m-0 p-0">
+        <div 
+        // className="grid grid-cols-12 gap-0 m-0 p-0"
+        style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${numCols}, 80px)`
+        }}
+        >
         {grid.map((rows, i) =>
-            rows.map((col, k) => (
+            rows.map((col, j) => (
             <div
-                key={`${i}-${k}`}
-                onClick={() => handleCellClick(i, k)}
+                key={`${i}-${j}`}
+                onClick={() => handleCellClick(i, j)}
                 className={`w-20 h-10 ${
-                grid[i][k] ? "bg-purple-500" : ""
+                grid[i][j] ? "bg-purple-500" : ""
             } border border-black`}
         />
         ))
