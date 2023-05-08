@@ -42,6 +42,7 @@ const Grid = () => {
   const runningRef = useRef(running);
   runningRef.current = running;
 
+
 // check cell neighbors function
 
 function checkAndAddNeighbors() {
@@ -55,9 +56,10 @@ function checkAndAddNeighbors() {
         const newI = i + x;
         const newJ = j + y;
 
+
       // check neighbors and add up value to variable
 
-        if(newI >= 0 && newI < numCols && newJ >= 0 && newJ < numRows ){
+      if(newI >= 0 && newI < numCols && newJ >= 0 && newJ < numRows ){
           neighbors += grid[newI][newJ];
         }
       })
@@ -119,4 +121,5 @@ function checkAndAddNeighbors() {
   );
 };
 
-export default Grid;
+
+export default Grid
