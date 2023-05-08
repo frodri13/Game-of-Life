@@ -1,8 +1,8 @@
 'use client'
 import { useCallback, useRef, useState } from "react";
 
-const numRows = 12;
-const numCols = 12;
+const numRows = 20;
+const numCols = 20;
 
 const operations = [
   [0, 1],
@@ -15,15 +15,19 @@ const operations = [
   [-1, 0],
 ]
 
+const createEmptyGrid = () => {
+  const rows = [];
+
+  for (let i = 0; i < numRows; i++) {
+    rows.push(Array.from(Array(numRows), () => 0));
+  }
+
+  return rows;
+}
+
 const Grid = () => {
   const [grid, setGrid] = useState(() => {
-    const rows = [];
-
-    for (let i = 0; i < numRows; i++) {
-      rows.push(Array.from(Array(numCols), () => 0));
-    }
-
-    return rows;
+    return createEmptyGrid();
   });
 
   console.table(grid)
