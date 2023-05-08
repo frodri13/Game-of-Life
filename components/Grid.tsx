@@ -1,39 +1,43 @@
 'use client'
-
 import { useState } from "react";
 
-const numRows = 50;
-const numCols = 50;
+const numRows = 12;
+const numCols = 12;
 
 const Grid = () => {
-    const [grid, setGrid] = useState(() => {
-        const rows = [];
+  const [grid, setGrid] = useState(() => {
+    const rows = [];
 
-        for(let i = 0; i < numRows; i++) {
-            rows.push(Array.from(Array(numCols), () => 0));
-        }
+    for (let i = 0; i < numRows; i++) {
+      rows.push(Array.from(Array(numCols), () => 0));
+    }
 
-        return rows;
-    });
+    return rows;
+  });
 
-    console.log(grid);
+  console.table(grid)
 
-    return(
-        <div style={{
-            display: 'grid',
-            gridTemplateColumns: `repeat(${numCols}, 20px)`
-        }
-        }>
-            {grid.map((rows, i) => 
-                rows.map((col, k) => (
-                    <div 
-                        key={`${i}-${k}`}
-                        className={`w-20 h-10 ${ grid[i][k] ? 'bg-pink-500' : '' } border border-black`}
-                    />
-                ))
-            )}
-        </div>
-    )
-}
+  const handleCellClick = (row: number, col: number) => {
+    const newGrid = [...grid];
+    newGrid[row][col] = newGrid[row][col] ? 0 : 1;
+    setGrid(newGrid);
+  };
+
+  return (
+    <div className="grid grid-cols-12 gap-0 m-0 p-0">
+      {grid.map((rows, i) =>
+        rows.map((col, k) => (
+          <div
+            key={`${i}-${k}`}
+            onClick={() => handleCellClick(i, k)}
+            className={`w-20 h-10 ${
+              grid[i][k] ? "bg-purple-500" : ""
+            } border border-black`}
+          />
+        ))
+      )}
+    </div>
+  );
+};
 
 export default Grid;
