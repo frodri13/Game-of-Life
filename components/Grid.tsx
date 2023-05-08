@@ -17,9 +17,22 @@ const Grid = () => {
     });
 
     console.log(grid);
-    
+
     return(
-        <div>Grid</div>
+        <div style={{
+            display: 'grid',
+            gridTemplateColumns: `repeat(${numCols}, 20px)`
+        }
+        }>
+            {grid.map((rows, i) => 
+                rows.map((col, k) => (
+                    <div 
+                        key={`${i}-${k}`}
+                        className={`w-20 h-10 ${ grid[i][k] ? 'bg-pink-500' : '' } border border-black`}
+                    />
+                ))
+            )}
+        </div>
     )
 }
 
