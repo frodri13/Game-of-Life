@@ -118,8 +118,8 @@ function checkAndAddNeighbors() {
                 onClick={() => handleCellClick(i, j)}
                 onMouseEnter={() => handleHover(i, j)}
                 className={`w-20 h-10 ${
-                grid[i][j] ? "bg-purple-500" : ""
-            } border border-black`}
+                grid[i][j] ? "bg-purple-500 dark:bg-orange-500" : ""
+            } border border-black dark:border-white`}
         />
         ))
     )}
