@@ -1,4 +1,7 @@
 'use client'
+import Image from 'next/image';
+import pause from '/public/static/images/pause.svg'
+import play from '/public/static/images/play.svg'
 import { useCallback, useRef, useState } from "react";
 
 const numRows = 20;
@@ -94,16 +97,33 @@ function checkAndAddNeighbors() {
 
   }
 
+  function handlePlayPauseClick() {
+    setRunning(!running);
+    runningRef.current = true;
+    runSimulation();
+  }
+
   return (
     <>
-        <button onClick={() =>{
-            setRunning(!running);
-            runningRef.current = true;
-            runSimulation();
-        }}
-        >
-          {running ? 'Stop' : 'Start'}
-          </button>
+          <button onClick={handlePlayPauseClick}>  {running ?
+          <Image 
+            src={pause}
+            alt='pause'
+            width={42}
+            height={42}
+            className='fixed p-2 z-10 right-20 top-4 bg-blue-300 hover:bg-blue-500
+            dark:bg-pink-300 dark:hover:bg-pink-500 text-lg rounded-md'
+          />
+          : 
+          <Image 
+          src={play}
+          alt='play'
+          width={42}
+          height={42}
+          className='fixed p-2 z-10 right-20 top-4 bg-blue-300 hover:bg-blue-500
+          dark:bg-pink-300 dark:hover:bg-pink-500 text-lg rounded-md'
+        />
+          } </button>
         <div 
         // className="grid grid-cols-12 gap-0 m-0 p-0"
         style={{
@@ -118,7 +138,7 @@ function checkAndAddNeighbors() {
                 onClick={() => handleCellClick(i, j)}
                 onMouseEnter={() => handleHover(i, j)}
                 className={`w-20 h-10 ${
-                grid[i][j] ? "bg-purple-500 dark:bg-orange-500" : ""
+                grid[i][j] ? "bg-blue-500 dark:bg-pink-500" : ""
             } border border-black dark:border-white`}
         />
         ))

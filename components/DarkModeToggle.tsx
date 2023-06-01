@@ -51,8 +51,8 @@ export default function DarkModeToggle() {
     
       return (
         <button onClick={toggleDarkMode}
-        className="fixed p-2 z-10 right-5 top-4 bg-violet-300 hover:bg-violet-500
-         dark:bg-orange-300 dark:hover:bg-orange-500 text-lg rounded-md"
+        className="fixed p-2 z-10 right-5 top-4 bg-blue-300 hover:bg-blue-500
+        dark:bg-pink-300 dark:hover:bg-pink-500 text-lg rounded-md"
         >
           {isDarkMode ? sun : moon}
         </button>
