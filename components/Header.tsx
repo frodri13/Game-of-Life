@@ -1,10 +1,10 @@
-import DarkModeToggle from "./DarkModeToggle"
+import ButtonGrid from "./ButtonGrid";
 
 export default function Header() {
 
     return(
         <header>
-            <DarkModeToggle /> 
+            <ButtonGrid />
         </header>
     )
 }
