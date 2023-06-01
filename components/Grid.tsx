@@ -78,8 +78,8 @@ function checkAndAddNeighbors() {
 
     checkAndAddNeighbors();
 
-    setTimeout(runSimulation, 1000);
-  }, [])
+    setTimeout(runSimulation, 600);
+  },[])
 
   const handleCellClick = (row: number, col: number) => {
     console.log('clicked')
