@@ -32,12 +32,6 @@ const Grid = () => {
 
   console.table(grid)
 
-  const handleCellClick = (row: number, col: number) => {
-    const newGrid = [...grid];
-    newGrid[row][col] = newGrid[row][col] ? 0 : 1;
-    setGrid(newGrid);
-  };
-
   const [running, setRunning] = useState(false)
   const runningRef = useRef(running);
   runningRef.current = running;
@@ -87,6 +81,19 @@ function checkAndAddNeighbors() {
     setTimeout(runSimulation, 1000);
   }, [])
 
+  const handleCellClick = (row: number, col: number) => {
+    console.log('clicked')
+    const newGrid = [...grid];
+    newGrid[row][col] = newGrid[row][col] ? 0 : 1;
+    setGrid(newGrid);
+  };
+
+
+  const handleHover = (row: number,col: number) => {
+    console.log('hovered')
+
+  }
+
   return (
     <>
         <button onClick={() =>{
@@ -109,6 +116,7 @@ function checkAndAddNeighbors() {
             <div
                 key={`${i}-${j}`}
                 onClick={() => handleCellClick(i, j)}
+                onMouseEnter={() => handleHover(i, j)}
                 className={`w-20 h-10 ${
                 grid[i][j] ? "bg-purple-500" : ""
             } border border-black`}
