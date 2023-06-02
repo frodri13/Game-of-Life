@@ -2,10 +2,7 @@
 import Image from 'next/image';
 import pause from '/public/static/images/pause.svg'
 import play from '/public/static/images/play.svg'
-import { useCallback, useRef, useState } from "react";
-
-const numRows = 20;
-const numCols = 20;
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const operations = [
   [0, 1],
@@ -18,17 +15,24 @@ const operations = [
   [-1, 0],
 ]
 
-const createEmptyGrid = () => {
-  const rows = [];
 
-  for (let i = 0; i < numRows; i++) {
-    rows.push(Array.from(Array(numRows), () => 0));
-  }
-
-  return rows;
-}
 
 const Grid = () => {
+  const [numRows, setNumRows] = useState(15);
+  const [numCols, setNumCols] = useState(15);
+
+  const createEmptyGrid = () => {
+
+
+    const cols = [];
+  
+    for (let i = 0; i <= numCols; i++) {
+      cols.push(Array.from(Array(numCols), () => 0));
+    }
+  
+    return cols;
+  }
+
   const [grid, setGrid] = useState(() => {
     return createEmptyGrid();
   });
@@ -39,7 +43,24 @@ const Grid = () => {
   const runningRef = useRef(running);
   runningRef.current = running;
 
+  useEffect(() => {
+    function handleResize() {
+      const { innerWidth } = window;
+      const numCols = Math.floor(innerWidth / 110);
+      const numRows = Math.floor(innerHeight / 40);
+      setNumRows(numRows);
+      setNumCols(numCols);
+      setGrid(createEmptyGrid());
+    }
 
+    handleResize(); // Initial window size logging
+
+    window.addEventListener('resize', handleResize); // Listen for resize events
+
+    return () => {
+      window.removeEventListener('resize', handleResize); // Cleanup on component unmount
+    };
+  }, []);
 // check cell neighbors function
 
 function checkAndAddNeighbors() {
@@ -104,7 +125,7 @@ function checkAndAddNeighbors() {
   }
 
   return (
-    <>
+    <div className='absolute max-w-md'>
           <button onClick={handlePlayPauseClick}>  {running ?
           <Image 
             src={pause}
@@ -144,7 +165,7 @@ function checkAndAddNeighbors() {
         ))
     )}
     </div>
-    </>
+    </div>
    
   );
 };
