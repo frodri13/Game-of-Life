@@ -46,8 +46,8 @@ const Grid = () => {
   useEffect(() => {
     function handleResize() {
       const { innerWidth } = window;
-      const numCols = Math.floor(innerWidth / 115);
-      const numRows = Math.floor(innerHeight / 60);
+      const numCols = Math.floor(innerWidth / 125);
+      const numRows = Math.floor(innerHeight / 80);
       setNumRows(numRows);
       setNumCols(numCols);
       setGrid(createEmptyGrid());
@@ -125,7 +125,7 @@ function checkAndAddNeighbors() {
   }
 
   return (
-    <div className='ml-20'>
+    <div className='ml-10'>
           <button onClick={handlePlayPauseClick}>  {running ?
           <Image 
             src={pause}

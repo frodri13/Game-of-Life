@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Rules(){
     return(
-        <div className="m-2 text-xl  max-w-md absolute right-0 invisible lg:visible">
+        <div className="m-2 text-xl max-w-xs absolute mr-12 right-6 invisible lg:visible">
                 <h2 className="text-center text-2xl p-2 m-2 text-bold text-blue-500 dark:text-pink-500">Rules</h2>
                 <ol className="m-2 dark:text-white">
                     <li>
